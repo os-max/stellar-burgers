@@ -45,6 +45,9 @@ export const burgerConstructorSlice = createSlice({
           (ingredient) => ingredient._id !== action.payload
         );
     },
+    clearConstructorItems: (state) => {
+      state.constructorItems = initialState.constructorItems;
+    },
     constructorItemUp: (state, action: PayloadAction<number>) => {
       const index = action.payload;
       const _ = state.constructorItems.ingredients[index];
@@ -62,6 +65,9 @@ export const burgerConstructorSlice = createSlice({
     setOrderRequest: (state, action: PayloadAction<boolean>) => {
       state.orderRequest = action.payload;
     },
+    setOrderModalData: (state, action: PayloadAction<TOrder>) => {
+      state.orderModalData = action.payload;
+    },
     clearOrderModalData: (state) => {
       state.orderModalData = initialState.orderModalData;
     }
@@ -72,27 +78,20 @@ export const burgerConstructorSlice = createSlice({
     getOrderModalData: (state) => state.orderModalData
   },
   extraReducers: (builder) =>
-    builder
-      .addCase(order.pending, (state) => {
-        state.orderRequest = true;
-      })
-      .addCase(order.fulfilled, (state, action) => {
-        state.orderModalData = action.payload.order;
-        state.orderRequest = false;
-        state.constructorItems = initialState.constructorItems;
-      })
-      .addCase(order.rejected, (state, action) => {
-        console.log(action.error);
-      })
+    builder.addCase(order.pending, (state) => {
+      state.orderRequest = true;
+    })
 });
 
 export const {
   addConstructorItem,
   removeConstructorItem,
   setOrderRequest,
+  setOrderModalData,
   clearOrderModalData,
   constructorItemUp,
-  constructorItemDown
+  constructorItemDown,
+  clearConstructorItems
 } = burgerConstructorSlice.actions;
 
 export const { getConstructorItems, getOrderModalData, getOrderRequest } =

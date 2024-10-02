@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
-import { getFeedsData } from './actions';
+import { getFeedsData, getUserOrdersData } from './actions';
 
 type TFeedSlice = {
   orders: TOrder[];
@@ -8,6 +8,7 @@ type TFeedSlice = {
     total: number;
     totalToday: number;
   };
+  myOrders: TOrder[];
 };
 
 const initialState: TFeedSlice = {
@@ -15,31 +16,33 @@ const initialState: TFeedSlice = {
   feedTotal: {
     total: 0,
     totalToday: 0
-  }
+  },
+  myOrders: []
 };
 
 export const feedSlice = createSlice({
   name: 'feed',
   initialState,
-  reducers: {
-    setFeed: (state, action: PayloadAction<TOrder[]>) => {
-      state.orders = action.payload;
-    }
-  },
+  reducers: {},
   selectors: {
     getFeed: (state) => state.orders,
-    getTotal: (state) => state.feedTotal
+    getTotal: (state) => state.feedTotal,
+    getUserOrders: (state) => state.myOrders
   },
   extraReducers: (builder) =>
-    builder.addCase(getFeedsData.fulfilled, (state, action) => {
-      state.orders = action.payload.orders;
-      state.feedTotal.total = action.payload.total;
-      state.feedTotal.totalToday = action.payload.totalToday;
-    })
+    builder
+      .addCase(getFeedsData.fulfilled, (state, action) => {
+        state.orders = action.payload.orders;
+        state.feedTotal.total = action.payload.total;
+        state.feedTotal.totalToday = action.payload.totalToday;
+      })
+      .addCase(getUserOrdersData.fulfilled, (state, action) => {
+        state.myOrders = action.payload;
+      })
 });
 
-export const { setFeed } = feedSlice.actions;
-export const { getFeed, getTotal } = feedSlice.selectors;
+// export const {  } = feedSlice.actions;
+export const { getFeed, getTotal, getUserOrders } = feedSlice.selectors;
 
 export type TFeedActions = ReturnType<
   (typeof feedSlice.actions)[keyof typeof feedSlice.actions]
