@@ -49,10 +49,12 @@ module.exports = {
   },
   plugins: [
     new ESLintPlugin({
-      extensions: ['.js', '.jsx', '.ts', '.tsx']
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      fix: true
     }),
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: './public/index.html',
+      inject: false,
     }),
     new Dotenv()
   ],
@@ -83,7 +85,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   devServer: {
     static: path.join(__dirname, './dist'),

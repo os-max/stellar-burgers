@@ -2,6 +2,7 @@ import { setCookie, getCookie } from './cookie';
 import { TIngredient, TOrder, TOrdersData, TUser } from './types';
 
 const URL = process.env.BURGER_API_URL;
+console.log(URL);
 
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
@@ -137,7 +138,7 @@ export type TRegisterData = {
   password: string;
 };
 
-type TAuthResponse = TServerResponse<{
+export type TAuthResponse = TServerResponse<{
   refreshToken: string;
   accessToken: string;
   user: TUser;
@@ -190,7 +191,12 @@ export const forgotPasswordApi = (data: { email: string }) =>
       return Promise.reject(data);
     });
 
-export const resetPasswordApi = (data: { password: string; token: string }) =>
+export type TResetData = {
+  password: string,
+  token: string,
+}
+
+export const resetPasswordApi = (data: TResetData) =>
   fetch(`${URL}/password-reset/reset`, {
     method: 'POST',
     headers: {
@@ -230,6 +236,6 @@ export const logoutApi = () =>
       'Content-Type': 'application/json;charset=utf-8'
     },
     body: JSON.stringify({
-      token: localStorage.getItem('refreshToken')
+      token: getCookie('refreshToken')
     })
   }).then((res) => checkResponse<TServerResponse<{}>>(res));
