@@ -59,7 +59,7 @@ export const userSlice = createSlice({
       .addCase(updateUserData.fulfilled, (state, action) => {
         state.user = action.payload.user;
       })
-      .addCase(updateUserData.rejected, (state, action) => {
+      .addCase(updateUserData.rejected, (_, action) => {
         console.log(action.error);
       })
       .addCase(logout.fulfilled, (state) => {
@@ -67,6 +67,9 @@ export const userSlice = createSlice({
         state.errorMessage = initialState.errorMessage;
         deleteCookie('accessToken');
         deleteCookie('refreshToken');
+      })
+      .addCase(logout.rejected, (state, action) => {
+        console.log(action.error);
       });
   }
 });

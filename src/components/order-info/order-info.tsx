@@ -4,13 +4,18 @@ import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useSelector } from '../../services/store';
 import { getIngredientList } from '../../services/ingredients/slice';
-import { getUserOrders } from '../../services/feed/slice';
+import { getFeed, getUserOrders } from '../../services/feed/slice';
 import { useParams } from 'react-router-dom';
 
 export const OrderInfo: FC = () => {
   const params = useParams();
 
-  const orderData = useSelector(getUserOrders).find(
+  /* API feed может не получить старые заказы пользователя */
+  const feedAndUserOrders = Array.from(
+    new Set(useSelector(getFeed).concat(useSelector(getUserOrders)))
+  );
+
+  const orderData = feedAndUserOrders.find(
     (order) => String(order.number) === params.number
   );
 

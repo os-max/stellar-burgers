@@ -8,7 +8,7 @@ type TFeedSlice = {
     total: number;
     totalToday: number;
   };
-  myOrders: TOrder[];
+  userOrders: TOrder[];
 };
 
 const initialState: TFeedSlice = {
@@ -17,7 +17,7 @@ const initialState: TFeedSlice = {
     total: 0,
     totalToday: 0
   },
-  myOrders: []
+  userOrders: []
 };
 
 export const feedSlice = createSlice({
@@ -27,7 +27,7 @@ export const feedSlice = createSlice({
   selectors: {
     getFeed: (state) => state.orders,
     getTotal: (state) => state.feedTotal,
-    getUserOrders: (state) => state.myOrders
+    getUserOrders: (state) => state.userOrders
   },
   extraReducers: (builder) =>
     builder
@@ -36,12 +36,17 @@ export const feedSlice = createSlice({
         state.feedTotal.total = action.payload.total;
         state.feedTotal.totalToday = action.payload.totalToday;
       })
+      .addCase(getFeedsData.rejected, (state, action) => {
+        console.log(action.error)
+      })
       .addCase(getUserOrdersData.fulfilled, (state, action) => {
-        state.myOrders = action.payload;
+        state.userOrders = action.payload;
+      })
+      .addCase(getUserOrdersData.rejected, (state, action) => {
+        console.log(action.error)
       })
 });
 
-// export const {  } = feedSlice.actions;
 export const { getFeed, getTotal, getUserOrders } = feedSlice.selectors;
 
 export type TFeedActions = ReturnType<

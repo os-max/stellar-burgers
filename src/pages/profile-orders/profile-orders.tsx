@@ -4,6 +4,7 @@ import { FC, useEffect } from 'react';
 import { getUserOrders } from '../../services/feed/slice';
 import { useDispatch, useSelector } from '../../services/store';
 import { getUserOrdersData } from '../../services/feed/actions';
+import { Preloader } from '@ui';
 
 export const ProfileOrders: FC = () => {
   /** TODO: взять переменную из стора */

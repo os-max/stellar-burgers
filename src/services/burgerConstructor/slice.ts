@@ -5,7 +5,7 @@ import {
   TIngredient,
   TOrder
 } from '@utils-types';
-import { order } from './actions';
+import { makeOrder } from './actions';
 
 type TBurgerConstructorSlice = {
   constructorItems: TConstructor;
@@ -42,7 +42,7 @@ export const burgerConstructorSlice = createSlice({
     removeConstructorItem: (state, action: PayloadAction<string>) => {
       state.constructorItems.ingredients =
         state.constructorItems.ingredients.filter(
-          (ingredient) => ingredient._id !== action.payload
+          (ingredient) => ingredient.id !== action.payload
         );
     },
     clearConstructorItems: (state) => {
@@ -50,17 +50,17 @@ export const burgerConstructorSlice = createSlice({
     },
     constructorItemUp: (state, action: PayloadAction<number>) => {
       const index = action.payload;
-      const _ = state.constructorItems.ingredients[index];
+      const t = state.constructorItems.ingredients[index];
       state.constructorItems.ingredients[index] =
         state.constructorItems.ingredients[index - 1];
-      state.constructorItems.ingredients[index - 1] = _;
+      state.constructorItems.ingredients[index - 1] = t;
     },
     constructorItemDown: (state, action: PayloadAction<number>) => {
       const index = action.payload;
-      const _ = state.constructorItems.ingredients[index];
+      const t = state.constructorItems.ingredients[index];
       state.constructorItems.ingredients[index] =
         state.constructorItems.ingredients[index + 1];
-      state.constructorItems.ingredients[index + 1] = _;
+      state.constructorItems.ingredients[index + 1] = t;
     },
     setOrderRequest: (state, action: PayloadAction<boolean>) => {
       state.orderRequest = action.payload;
@@ -78,7 +78,7 @@ export const burgerConstructorSlice = createSlice({
     getOrderModalData: (state) => state.orderModalData
   },
   extraReducers: (builder) =>
-    builder.addCase(order.pending, (state) => {
+    builder.addCase(makeOrder.pending, (state) => {
       state.orderRequest = true;
     })
 });

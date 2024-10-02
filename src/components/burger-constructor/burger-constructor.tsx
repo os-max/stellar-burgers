@@ -9,7 +9,7 @@ import {
   getOrderRequest,
   setOrderRequest
 } from '../../services/burgerConstructor/slice';
-import { order } from '../../services/burgerConstructor/actions';
+import { makeOrder } from '../../services/burgerConstructor/actions';
 import { getUser } from '../../services/auth/slice';
 import { useNavigate } from 'react-router-dom';
 
@@ -33,7 +33,7 @@ export const BurgerConstructor: FC = () => {
     }
 
     dispatch(
-      order(
+      makeOrder(
         Array.from(constructorItems.ingredients, (ing) => ing._id).concat([
           constructorItems.bun._id
         ])

@@ -5,9 +5,9 @@ import {
   setOrderModalData,
   setOrderRequest
 } from './slice';
-import { getFeedsData, getUserOrdersData } from '../feed/actions';
+import { getFeedsData } from '../feed/actions';
 
-export const order = createAsyncThunk(
+export const makeOrder = createAsyncThunk(
   'burgerConstructor/order',
   async (burgerData: string[], { dispatch }) => {
     orderBurgerApi(burgerData)
@@ -15,7 +15,6 @@ export const order = createAsyncThunk(
         dispatch(setOrderModalData(res.order));
         dispatch(clearConstructorItems());
         dispatch(getFeedsData());
-        dispatch(getUserOrdersData());
       })
       .catch((err) =>
         console.log(err)
