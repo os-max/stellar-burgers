@@ -13,19 +13,15 @@ import '../../index.css';
 import styles from './app.module.css';
 
 import { AppHeader, IngredientDetails, OrderInfo } from '@components';
-import {
-  Navigate,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate
-} from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route';
 import { Modal } from '../modal';
 import { useEffect } from 'react';
 import { useDispatch } from '../../services/store';
 import { getUserData } from '../../services/auth/actions';
 import { getIngredients } from '../../services/ingredients/actions';
+import { getFeedsData } from '../../services/feed/actions';
+import { Layout } from '../layout';
 
 const App = () => {
   const navigate = useNavigate();
@@ -34,6 +30,7 @@ const App = () => {
   useEffect(() => {
     dispatch(getIngredients());
     dispatch(getUserData());
+    dispatch(getFeedsData());
 
     return;
   }, []);
@@ -47,8 +44,22 @@ const App = () => {
       <Routes location={backgroundLocation || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
-        <Route path='/feed/:number' element={<OrderInfo />} />
-        <Route path='/ingredients/:id' element={<IngredientDetails />} />
+        <Route
+          path='/feed/:number'
+          element={
+            <Layout type='order'>
+              <OrderInfo />
+            </Layout>
+          }
+        />
+        <Route
+          path='/ingredients/:id'
+          element={
+            <Layout type='ingredient'>
+              <IngredientDetails />
+            </Layout>
+          }
+        />
         <Route
           path='/login'
           element={
@@ -97,6 +108,16 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route
+          path='/profile/orders/:number'
+          element={
+            <ProtectedRoute>
+              <Layout type='order'>
+                <OrderInfo />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
         <Route path='*' element={<NotFound404 />} />
       </Routes>
       {backgroundLocation && (
@@ -125,6 +146,21 @@ const App = () => {
               >
                 <IngredientDetails />
               </Modal>
+            }
+          />
+          <Route
+            path='profile/orders/:number'
+            element={
+              <ProtectedRoute>
+                <Modal
+                  title='Детали заказа'
+                  onClose={() => {
+                    navigate('/profile/orders');
+                  }}
+                >
+                  <OrderInfo />
+                </Modal>
+              </ProtectedRoute>
             }
           />
         </Routes>

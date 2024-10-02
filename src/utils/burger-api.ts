@@ -1,8 +1,7 @@
 import { setCookie, getCookie } from './cookie';
-import { TIngredient, TOrder, TOrdersData, TUser } from './types';
+import { TIngredient, TOrder, TUser } from './types';
 
 const URL = process.env.BURGER_API_URL;
-console.log(URL);
 
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
@@ -192,9 +191,9 @@ export const forgotPasswordApi = (data: { email: string }) =>
     });
 
 export type TResetData = {
-  password: string,
-  token: string,
-}
+  password: string;
+  token: string;
+};
 
 export const resetPasswordApi = (data: TResetData) =>
   fetch(`${URL}/password-reset/reset`, {

@@ -6,11 +6,12 @@ import {
   clearOrderModalData,
   getConstructorItems,
   getOrderModalData,
-  getOrderRequest
+  getOrderRequest,
+  setOrderRequest
 } from '../../services/burgerConstructor/slice';
 import { order } from '../../services/burgerConstructor/actions';
 import { getUser } from '../../services/auth/slice';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export const BurgerConstructor: FC = () => {
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
+
     if (!user) {
       navigate('/login', {
         state: { from: '/' }
@@ -41,6 +43,7 @@ export const BurgerConstructor: FC = () => {
 
   const closeOrderModal = () => {
     dispatch(clearOrderModalData());
+    dispatch(setOrderRequest(false));
   };
 
   const price = useMemo(

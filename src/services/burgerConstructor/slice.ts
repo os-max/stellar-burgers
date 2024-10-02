@@ -40,10 +40,24 @@ export const burgerConstructorSlice = createSlice({
       }
     },
     removeConstructorItem: (state, action: PayloadAction<string>) => {
-      console.log(action.payload);
-      state.constructorItems.ingredients = state.constructorItems.ingredients.filter(
-        ingredient => ingredient._id !== action.payload
-      );
+      state.constructorItems.ingredients =
+        state.constructorItems.ingredients.filter(
+          (ingredient) => ingredient._id !== action.payload
+        );
+    },
+    constructorItemUp: (state, action: PayloadAction<number>) => {
+      const index = action.payload;
+      const _ = state.constructorItems.ingredients[index];
+      state.constructorItems.ingredients[index] =
+        state.constructorItems.ingredients[index - 1];
+      state.constructorItems.ingredients[index - 1] = _;
+    },
+    constructorItemDown: (state, action: PayloadAction<number>) => {
+      const index = action.payload;
+      const _ = state.constructorItems.ingredients[index];
+      state.constructorItems.ingredients[index] =
+        state.constructorItems.ingredients[index + 1];
+      state.constructorItems.ingredients[index + 1] = _;
     },
     setOrderRequest: (state, action: PayloadAction<boolean>) => {
       state.orderRequest = action.payload;
@@ -76,7 +90,9 @@ export const {
   addConstructorItem,
   removeConstructorItem,
   setOrderRequest,
-  clearOrderModalData
+  clearOrderModalData,
+  constructorItemUp,
+  constructorItemDown
 } = burgerConstructorSlice.actions;
 
 export const { getConstructorItems, getOrderModalData, getOrderRequest } =
