@@ -17,15 +17,17 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route';
 import { Modal } from '../modal';
 import { useEffect } from 'react';
-import { useDispatch } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { getUserData } from '../../services/auth/actions';
 import { getIngredients } from '../../services/ingredients/actions';
 import { getFeedsData } from '../../services/feed/actions';
 import { Layout } from '../layout';
+import { getUser } from '../../services/auth/slice';
 
 const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userName = useSelector(getUser)?.name;
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -40,7 +42,7 @@ const App = () => {
 
   return (
     <div className={styles.app}>
-      <AppHeader />
+      <AppHeader userName={userName} />
       <Routes location={backgroundLocation || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
@@ -139,7 +141,7 @@ const App = () => {
             path='/ingredients/:id'
             element={
               <Modal
-                title='Ингредиент'
+                title='Детали ингредиента'
                 onClose={() => {
                   navigate('/');
                 }}

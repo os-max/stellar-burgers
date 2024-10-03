@@ -1,15 +1,17 @@
 import { FC, memo } from 'react';
 
-import { TLayoutProps } from './type';
+import { THeaderType, TLayoutProps } from './type';
 import { LayoutUI } from '@ui';
 import { useParams } from 'react-router-dom';
 
 export const Layout: FC<TLayoutProps> = memo(({ type, children }) => {
   let title;
+  let headerType: THeaderType = 'text_type_main-large';
 
   switch (type) {
     case 'order': {
       title = `#${useParams().number}` || '';
+      headerType = 'text_type_digits-default';
       break;
     }
     case 'ingredient': {
@@ -17,5 +19,9 @@ export const Layout: FC<TLayoutProps> = memo(({ type, children }) => {
     }
   }
 
-  return <LayoutUI title={title}>{children}</LayoutUI>;
+  return (
+    <LayoutUI title={title} headerType={headerType}>
+      {children}
+    </LayoutUI>
+  );
 });

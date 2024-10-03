@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './app-header.module.css';
 import { TAppHeaderUIProps } from './type';
@@ -20,8 +20,14 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
             isActive ? clsx(styles.link_active, styles.link) : styles.link
           }
         >
-          <BurgerIcon type={'primary'} />
-          <p className='text text_type_main-default ml-2 mr-10'>Конструктор</p>
+          {({ isActive }) => (
+            <>
+              <BurgerIcon type={isActive ? 'secondary' : 'primary'} />
+              <p className='text text_type_main-default ml-2 mr-10'>
+                Конструктор
+              </p>
+            </>
+          )}
         </NavLink>
         <NavLink
           to='/feed'
@@ -29,8 +35,12 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
             isActive ? clsx(styles.link_active, styles.link) : styles.link
           }
         >
-          <ListIcon type={'primary'} />
-          <p className='text text_type_main-default ml-2'>Лента заказов</p>
+          {({ isActive }) => (
+            <>
+              <ListIcon type={isActive ? 'secondary' : 'primary'} />
+              <p className='text text_type_main-default ml-2'>Лента заказов</p>
+            </>
+          )}
         </NavLink>
       </div>
       <div className={styles.logo}>
@@ -43,10 +53,14 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
             isActive ? clsx(styles.link_active, styles.link) : styles.link
           }
         >
-          <ProfileIcon type={'primary'} />
-          <p className='text text_type_main-default ml-2'>
-            {userName || 'Личный кабинет'}
-          </p>
+          {({ isActive }) => (
+            <>
+              <ProfileIcon type={isActive ? 'secondary' : 'primary'} />
+              <p className='text text_type_main-default ml-2'>
+                {userName || 'Личный кабинет'}
+              </p>
+            </>
+          )}
         </NavLink>
       </div>
     </nav>

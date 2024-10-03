@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
-import { getFeedsData, getUserOrdersData } from './actions';
+import { getFeedsData, getOrderByNumber, getUserOrdersData } from './actions';
 
 type TFeedSlice = {
   orders: TOrder[];
@@ -43,6 +43,13 @@ export const feedSlice = createSlice({
         state.userOrders = action.payload;
       })
       .addCase(getUserOrdersData.rejected, (state, action) => {
+        console.log(action.error)
+      })
+      .addCase(getOrderByNumber.fulfilled, (state, action) => {
+        if (!state.orders.find(order => order._id === action.payload.orders[0]._id))
+          state.orders.push(action.payload.orders[0])
+      })
+      .addCase(getOrderByNumber.rejected, (state, action) => {
         console.log(action.error)
       })
 });
