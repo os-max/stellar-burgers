@@ -13,7 +13,13 @@ import '../../index.css';
 import styles from './app.module.css';
 
 import { AppHeader, IngredientDetails, OrderInfo } from '@components';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Route,
+  Routes,
+  useLocation,
+  useMatch,
+  useNavigate
+} from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route';
 import { Modal } from '../modal';
 import { useEffect } from 'react';
@@ -28,6 +34,10 @@ const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userName = useSelector(getUser)?.name;
+
+  const orderMatch = useMatch('/profile/orders/:number')?.params.number;
+  const feedMatch = useMatch('/feed/:number')?.params.number;
+  const orderNumber = orderMatch || feedMatch;
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -128,7 +138,7 @@ const App = () => {
             path='/feed/:number'
             element={
               <Modal
-                title='Детали заказа'
+                title={`#${orderNumber && orderNumber.padStart(6, '0')}`}
                 onClose={() => {
                   navigate('/feed');
                 }}
@@ -155,7 +165,7 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Modal
-                  title='Детали заказа'
+                  title={`#${orderNumber && orderNumber.padStart(6, '0')}`}
                   onClose={() => {
                     navigate('/profile/orders');
                   }}

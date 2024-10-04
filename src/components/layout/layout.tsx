@@ -10,7 +10,7 @@ export const Layout: FC<TLayoutProps> = memo(({ type, children }) => {
 
   switch (type) {
     case 'order': {
-      title = `#${useParams().number}` || '';
+      title = `#${useParams().number?.padStart(6, '0')}`;
       headerType = 'text_type_digits-default';
       break;
     }

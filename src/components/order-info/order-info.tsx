@@ -22,7 +22,7 @@ export const OrderInfo: FC = () => {
   );
 
   const orderData = feedAndUserOrders.find(
-    (order) => String(order.number) === params.number
+    (order) => String(order?.number) === params.number
   );
 
   const ingredients = useSelector(getIngredientList);
