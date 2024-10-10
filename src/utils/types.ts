@@ -16,6 +16,11 @@ export type TConstructorIngredient = TIngredient & {
   id: string;
 };
 
+export type TConstructor = {
+  bun: TConstructorIngredient | null,
+  ingredients: TConstructorIngredient[]
+};
+
 export type TOrder = {
   _id: string;
   status: string;
@@ -25,6 +30,11 @@ export type TOrder = {
   number: number;
   ingredients: string[];
 };
+
+export type TTotal = {
+  total: number,
+  totalToday: number
+}
 
 export type TOrdersData = {
   orders: TOrder[];

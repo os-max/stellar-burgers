@@ -17,11 +17,11 @@
 .link {
   display: flex;
   text-decoration: none;
-  color: var(--text-inactive-color);
+  color: #8585ad;
 }
 
 .link_active {
-  color: var(--text-primary-color);
+  color: #f2f2f3;
 }
 
 .link_position_last {

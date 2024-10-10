@@ -1,25 +1,35 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
+import { useDispatch, useSelector } from '../../services/store';
+import { getIngredientList } from '../../services/ingredients/slice';
+import { getFeed, getUserOrders } from '../../services/feed/slice';
+import { useParams } from 'react-router-dom';
+import { getOrderByNumber } from '../../services/feed/actions';
 
 export const OrderInfo: FC = () => {
-  /** TODO: взять переменные orderData и ingredients из стора */
-  const orderData = {
-    createdAt: '',
-    ingredients: [],
-    _id: '',
-    status: '',
-    name: '',
-    updatedAt: 'string',
-    number: 0
-  };
+  const params = useParams();
 
-  const ingredients: TIngredient[] = [];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getOrderByNumber(Number(params.number)));
+  }, []);
+
+  /* API feed может не получить старые заказы пользователя */
+  const feedAndUserOrders = Array.from(
+    new Set(useSelector(getFeed).concat(useSelector(getUserOrders)))
+  );
+
+  const orderData = feedAndUserOrders.find(
+    (order) => String(order?.number) === params.number
+  );
+
+  const ingredients = useSelector(getIngredientList);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
-    if (!orderData || !ingredients.length) return null;
+    if (!orderData || !ingredients) return null;
 
     const date = new Date(orderData.createdAt);
 
@@ -29,8 +39,16 @@ export const OrderInfo: FC = () => {
 
     const ingredientsInfo = orderData.ingredients.reduce(
       (acc: TIngredientsWithCount, item) => {
+        const ingredient = ingredients.find((ing) => ing._id === item);
+        if (ingredient?.type === 'bun') {
+          acc[item] = {
+            ...ingredient,
+            count: 2
+          };
+
+          return acc;
+        }
         if (!acc[item]) {
-          const ingredient = ingredients.find((ing) => ing._id === item);
           if (ingredient) {
             acc[item] = {
               ...ingredient,
