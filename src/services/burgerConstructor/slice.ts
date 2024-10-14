@@ -97,6 +97,8 @@ export const {
 export const { getConstructorItems, getOrderModalData, getOrderRequest } =
   burgerConstructorSlice.selectors;
 
+export const burgerConstructorReducer = burgerConstructorSlice.reducer;
+
 export type TBurgerConstructorActions = ReturnType<
   (typeof burgerConstructorSlice.actions)[keyof typeof burgerConstructorSlice.actions]
 >;

@@ -10,7 +10,7 @@ import {
   setOrderRequest
 } from '../../services/burgerConstructor/slice';
 import { makeOrder } from '../../services/burgerConstructor/actions';
-import { getUser } from '../../services/auth/slice';
+import { getUser } from '../../services/user/slice';
 import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {

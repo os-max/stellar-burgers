@@ -56,6 +56,8 @@ export const feedSlice = createSlice({
 
 export const { getFeed, getTotal, getUserOrders } = feedSlice.selectors;
 
+export const feedReducer = feedSlice.reducer
+
 export type TFeedActions = ReturnType<
   (typeof feedSlice.actions)[keyof typeof feedSlice.actions]
 >;
