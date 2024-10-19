@@ -5,8 +5,8 @@ import { rootReducer } from "./store";
 import { userReducer } from "./user/slice";
 
 
-describe('Проверка rootReducer', () => {
-    it('Проверка состояния при инициализации', () => {
+describe('Test rootReducer', () => {
+    it('Test state of store on initialization', () => {
         const initAction = { type: '@@INIT' };
         const state = rootReducer(undefined, initAction);
         expect(state).toEqual({

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.61% </span>
+                <span class="strong">94.23% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>88/104</span>
+                <span class='fraction'>98/104</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30.76% </span>
+                <span class="strong">46.15% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/13</span>
+                <span class='fraction'>6/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.61% </span>
+                <span class="strong">94.23% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>88/104</span>
+                <span class='fraction'>98/104</span>
             </div>
         
             
@@ -218,18 +218,18 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -321,19 +321,19 @@ export const burgerConstructorSlice = createSlice({
     clearConstructorItems: <span class="fstat-no" title="function not covered" >(state) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >      state.constructorItems = initialState.constructorItems;</span>
     },
-    constructorItemUp: <span class="fstat-no" title="function not covered" >(state, action: PayloadAction&lt;number&gt;) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      const index = action.payload;</span>
-<span class="cstat-no" title="statement not covered" >      const t = state.constructorItems.ingredients[index];</span>
-<span class="cstat-no" title="statement not covered" >      state.constructorItems.ingredients[index] =</span>
-<span class="cstat-no" title="statement not covered" >        state.constructorItems.ingredients[index - 1];</span>
-<span class="cstat-no" title="statement not covered" >      state.constructorItems.ingredients[index - 1] = t;</span>
+    constructorItemUp: (state, action: PayloadAction&lt;number&gt;) =&gt; {
+      const index = action.payload;
+      const t = state.constructorItems.ingredients[index];
+      state.constructorItems.ingredients[index] =
+        state.constructorItems.ingredients[index - 1];
+      state.constructorItems.ingredients[index - 1] = t;
     },
-    constructorItemDown: <span class="fstat-no" title="function not covered" >(state, action: PayloadAction&lt;number&gt;) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      const index = action.payload;</span>
-<span class="cstat-no" title="statement not covered" >      const t = state.constructorItems.ingredients[index];</span>
-<span class="cstat-no" title="statement not covered" >      state.constructorItems.ingredients[index] =</span>
-<span class="cstat-no" title="statement not covered" >        state.constructorItems.ingredients[index + 1];</span>
-<span class="cstat-no" title="statement not covered" >      state.constructorItems.ingredients[index + 1] = t;</span>
+    constructorItemDown: (state, action: PayloadAction&lt;number&gt;) =&gt; {
+      const index = action.payload;
+      const t = state.constructorItems.ingredients[index];
+      state.constructorItems.ingredients[index] =
+        state.constructorItems.ingredients[index + 1];
+      state.constructorItems.ingredients[index + 1] = t;
     },
     setOrderRequest: <span class="fstat-no" title="function not covered" >(state, action: PayloadAction&lt;boolean&gt;) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >      state.orderRequest = action.payload;</span>
@@ -382,7 +382,7 @@ export type TBurgerConstructorActions = ReturnType&lt;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-10-14T16:25:46.302Z
+                at 2024-10-19T23:12:11.008Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
