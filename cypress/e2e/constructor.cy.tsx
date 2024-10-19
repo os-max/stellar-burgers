@@ -3,8 +3,8 @@ beforeEach(() => {
     cy.intercept('GET', '/api/ingredients', {fixture: 'ingredients' });
     cy.intercept('GET', '/api/auth/user', {fixture: 'user'});
     cy.intercept('POST', '/api/orders', {fixture: 'order'});
-    cy.setCookie('accessToken', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZmFmYzAzMDdjYzBiMDAxYzFkNTA4MCIsImlhdCI6MTcyODc1NDYzNCwiZXhwIjoxNzI4NzU1ODM0fQ.CiV9KK-L9JRwawkB3E31zICaEV23zkYOOPZIPgYGJRU')
-    cy.setCookie('refreshToken', '0fe8ad5fc22c1cff5750a9d9a7b374aabe5299c101427f20681dda55dd4b917d2ede0267b53a72c9')
+    cy.setCookie('accessToken', 'Bearer test')
+    cy.setCookie('refreshToken', 'test')
 
     cy.visit('http://localhost:4000');
 })

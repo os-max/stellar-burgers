@@ -15,8 +15,8 @@ describe('Test for registration/authorization', () => {
     }
 
     const authResponse = {
-        accessToken: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZmFmYzAzMDdjYzBiMDAxYzFkNTA4MCIsImlhdCI6MTcyOTE4NTU0MSwiZXhwIjoxNzI5MTg2NzQxfQ.DQDFUin9ZQymXenRXzfe1NHVAIFJ8vqV7pVnthPs_iA",
-        refreshToken: "6f98479204e7dd7e21d51d2de548a1d8bda9f04278d36de9a7e0d2f76dad1abb48fc31e561d36a66",
+        accessToken: "Bearer test",
+        refreshToken: "test",
         user: {
             name: 'Test Test',
             email: 'test@test.com'
