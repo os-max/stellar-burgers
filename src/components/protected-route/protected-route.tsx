@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { getIsAuthChecked, getUser } from '../../services/auth/slice';
+import { getIsAuthChecked, getUser } from '../../services/user/slice';
 import { useSelector } from '../../services/store';
 import { Preloader } from '@ui';
 

@@ -78,6 +78,8 @@ export const { setUser, setIsAuthChecked, setErrorMessage } = userSlice.actions;
 export const { getUser, getIsAuthChecked, getErrorMessage } =
   userSlice.selectors;
 
+export const userReducer = userSlice.reducer;
+
 export type TAuthActions = ReturnType<
   (typeof userSlice.actions)[keyof typeof userSlice.actions]
 >;

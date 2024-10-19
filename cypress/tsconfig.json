@@ -1,0 +1,19 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["cypress"]
+  },
+  "include": [
+    "../node_modules/cypress",
+    "./**/*.ts"
+  ],
+  "eslintConfig": {
+    "extends": [
+      "plugin:cypress/recommended"
+    ],
+    "globals": {
+      "cy": true
+    }
+  }
+}

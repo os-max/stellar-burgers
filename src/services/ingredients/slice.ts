@@ -47,6 +47,8 @@ export const { setIsIngredientLoading, setIngredientList } =
 export const { getIsIngredientLoading, getIngredientList } =
   ingredientsSlice.selectors;
 
+export const ingredientsReducer = ingredientsSlice.reducer;
+
 export type TIngredientsActions = ReturnType<
   (typeof ingredientsSlice.actions)[keyof typeof ingredientsSlice.actions]
 >;

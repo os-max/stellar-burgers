@@ -24,11 +24,11 @@ import { ProtectedRoute } from '../protected-route';
 import { Modal } from '../modal';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from '../../services/store';
-import { getUserData } from '../../services/auth/actions';
+import { getUserData } from '../../services/user/actions';
 import { getIngredients } from '../../services/ingredients/actions';
 import { getFeedsData } from '../../services/feed/actions';
 import { Layout } from '../layout';
-import { getUser } from '../../services/auth/slice';
+import { getUser } from '../../services/user/slice';
 
 const App = () => {
   const navigate = useNavigate();
